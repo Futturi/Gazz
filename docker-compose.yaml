@@ -1,0 +1,28 @@
+version: '3.5'
+services:
+  front:
+    build: frontend
+    ports:
+      - 3000:80
+    depends_on:
+      - app
+  app:
+    build: ./
+    ports:
+      - 8080:8080
+    container_name: gazapp
+    restart: unless-stopped
+    depends_on:
+      - sql-server
+    environment:
+      - EMAIL_SENDER_ADDRESS=vanech12345@gmail.com
+      - EMAIL_SENDER_PASSWORD=hnaxzkvwaiyxlptq
+  sql-server:
+    image: postgres
+    ports:
+      - '5432:5432'
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=root

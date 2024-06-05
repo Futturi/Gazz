@@ -1,0 +1,6 @@
+host:     "sql-server"
+port:     "5432"
+username: "root"
+password: "root"
+dbname:   "root"
+sslmode:  "disable"
