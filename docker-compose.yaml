@@ -7,7 +7,7 @@ services:
     depends_on:
       - app
   app:
-    build: ./
+    build: Gaz
     ports:
       - 8080:8080
     container_name: gazapp
