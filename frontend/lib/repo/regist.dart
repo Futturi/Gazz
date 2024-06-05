@@ -7,7 +7,7 @@ final dio = Dio();
 
 class RegistRepo{
   Future<regist> signUp(String email, String password, String name, String birthday) async{
-    final response = await dio.post("http://localhost:8080/auth/signup", data: {'email': email, 'password': password, 'name': name, 'birthday': birthday}, options: Options(headers: {
+    final response = await dio.post("http://localhost:8080/auth/signup", data: {'email': email, 'password': password, 'username': name, 'birthday': birthday}, options: Options(headers: {
       'Accept': 'application/json',
     }));
     if(response.statusCode == 200) {

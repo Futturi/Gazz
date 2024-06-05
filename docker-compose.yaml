@@ -10,7 +10,7 @@ services:
     build: Gaz
     ports:
       - 8080:8080
-    container_name: gazapp
+    container_name: gaz
     restart: unless-stopped
     depends_on:
       - sql-server
