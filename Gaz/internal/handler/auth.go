@@ -84,6 +84,7 @@ func (h *Handler) SignIn(c *fiber.Ctx) error {
 			"error": "smth wrong in server",
 		})
 	}
+	slog.Info("user was logged with", "token", token)
 	return c.Status(fasthttp.StatusOK).JSON(fiber.Map{
 		"token": token,
 	})

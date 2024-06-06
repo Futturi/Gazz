@@ -6,8 +6,12 @@ CREATE TABLE users(
     birthdate DATE
 );
 
+CREATE INDEX idx_users_username ON users(username);
+
 CREATE TABLE subscribers(
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id),
     main_id INTEGER NOT NULL REFERENCES users(id)
 );
+
+CREATE INDEX idx_subscribers_user_id ON subscribers(user_id);

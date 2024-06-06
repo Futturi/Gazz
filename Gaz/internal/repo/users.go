@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/Futturi/Gaz/internal/entities"
 	"github.com/jmoiron/sqlx"
+	"log/slog"
 )
 
 type UsersRepo struct {
@@ -20,5 +21,6 @@ func (r *UsersRepo) GetUsers(id float64) ([]entities.UserForDb, error) {
 	if err := r.db.Select(&users, query, id); err != nil {
 		return nil, err
 	}
+	slog.Info("get all users", "id", id)
 	return users, nil
 }

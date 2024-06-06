@@ -10,6 +10,8 @@ import (
 	"github.com/spf13/viper"
 	"log/slog"
 	"os"
+	"os/signal"
+	"syscall"
 	"time"
 )
 
@@ -57,8 +59,21 @@ func main() {
 	handler := handler.NewHandler(service, c)
 
 	defer c.Stop()
-	if err := handler.Init().Listen(":" + port); err != nil {
-		slog.Error("error with initializing server", "error", err)
+	go func() {
+		if err := handler.Init().Listen(":" + port); err != nil {
+			slog.Error("error with initializing server", "error", err)
+		}
+	}()
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
+	<-quit
+	if err := pkg.Shutdown(db); err != nil {
+		slog.Error("error with shutdown db", "error", err)
+		os.Exit(1)
+	}
+	if err := handler.Init().Shutdown(); err != nil {
+		slog.Error("error with shutdown server", "error", err)
+		os.Exit(1)
 	}
 }
 

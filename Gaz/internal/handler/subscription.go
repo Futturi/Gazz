@@ -45,6 +45,7 @@ func (h *Handler) Subscribe(c *fiber.Ctx) error {
 			"message": "smth wrong in server",
 		})
 	}
+	slog.Info("user with id subscribed", "id", id, "username", req.Username)
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "subscribed",
 	})
@@ -88,6 +89,7 @@ func (h *Handler) Unsubscribe(c *fiber.Ctx) error {
 			"message": "smth wrong in server",
 		})
 	}
+	slog.Info("user with id was unsubscribed", "id", id, "username", req.Username)
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "unsubscribed",
 	})

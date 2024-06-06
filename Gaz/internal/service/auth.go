@@ -6,6 +6,7 @@ import (
 	"github.com/Futturi/Gaz/internal/entities"
 	"github.com/Futturi/Gaz/internal/repo"
 	"github.com/golang-jwt/jwt/v4"
+	"log/slog"
 	"os"
 	"time"
 )
@@ -40,6 +41,7 @@ func (a *AuthService) SignUp(user entities.User) (int, error) {
 func hashPass(password string) string {
 	hash := sha1.New()
 	hash.Write([]byte(password))
+	slog.Info("password was hashed")
 	return fmt.Sprintf("%x", hash.Sum([]byte(salt1)))
 }
 

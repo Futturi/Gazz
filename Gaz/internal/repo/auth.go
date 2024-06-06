@@ -34,5 +34,6 @@ func (r *AuthRepo) SignIn(user entities.User) (int, error) {
 	if err := row.Scan(&id); err != nil {
 		return 0, err
 	}
+	slog.Info("user in db", "id", id)
 	return id, nil
 }

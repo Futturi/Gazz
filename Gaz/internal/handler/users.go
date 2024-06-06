@@ -32,6 +32,7 @@ func (h *Handler) GetUsers(c *fiber.Ctx) error {
 			"message": "smth wrong in server",
 		})
 	}
+	slog.Info("user with id get all users", "id", id)
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"users": users,
 	})

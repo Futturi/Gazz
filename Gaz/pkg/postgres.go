@@ -34,3 +34,7 @@ func Init(cfg Config) (*sqlx.DB, error) {
 	}
 	return conn, err
 }
+
+func Shutdown(db *sqlx.DB) error {
+	return db.Close()
+}

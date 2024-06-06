@@ -14,6 +14,7 @@ const (
 func JwtMiddleware(c *fiber.Ctx) error {
 	tokenString := c.Get("Authorization")
 	if tokenString == "" {
+		slog.Error("missing token")
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"message": "Missing or malformed JWT",
 		})
@@ -21,6 +22,7 @@ func JwtMiddleware(c *fiber.Ctx) error {
 
 	token, err := jwt.Parse(strings.Split(tokenString, " ")[1], func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			slog.Error("unexpected signing method")
 			return nil, fiber.NewError(fiber.StatusUnauthorized, "Unexpected signing method")
 		}
 		return []byte(salt2), nil
@@ -33,6 +35,6 @@ func JwtMiddleware(c *fiber.Ctx) error {
 		})
 	}
 	c.Locals("user", token.Claims.(jwt.MapClaims))
-
+	slog.Info("user with id signed", "id", token.Claims.(jwt.MapClaims)["id"])
 	return c.Next()
 }
