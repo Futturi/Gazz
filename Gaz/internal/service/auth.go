@@ -6,12 +6,13 @@ import (
 	"github.com/Futturi/Gaz/internal/entities"
 	"github.com/Futturi/Gaz/internal/repo"
 	"github.com/golang-jwt/jwt/v4"
+	"os"
 	"time"
 )
 
-const (
-	salt1 = "2ketgksdkepqwor[ptweoyiwjeijeasdnfdvberoiwpas,clvdknbftjlsa;x;,cvnbgreals;xzc,c,vnfdwow"
-	salt2 = "legjliqjwoejrqfgeniowo4i3wipreq;ksdfjbgkhoiterwpq[lasdkmcvnbfjghutriowepq[als;dk,m,cvnkfjg"
+var (
+	salt1 = os.Getenv("SHA_SALT")
+	salt2 = os.Getenv("JWT_SALT")
 )
 
 type AuthService struct {

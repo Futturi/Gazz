@@ -19,6 +19,7 @@ func NewSerivce(repo *repo.Repository) *Serivce {
 		Notification: NewNotificationService(repo.Notification)}
 }
 
+//go:generate mockgen -source=service.go -destination=mocks/mockr.go
 type Auth interface {
 	SignUp(user entities.User) (int, error)
 	SignIn(user entities.User) (string, error)

@@ -13,6 +13,20 @@ import (
 	"time"
 )
 
+// @title Notification app
+// @version 1.0
+// @description API Server 4 Notification Application
+
+// @host localhost:8080
+// @BasePath /
+
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
+var (
+	port = os.Getenv("APP_PORT")
+)
+
 func main() {
 	fmt.Println(time.Now())
 	logg := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelInfo}))
@@ -43,7 +57,7 @@ func main() {
 	handler := handler.NewHandler(service, c)
 
 	defer c.Stop()
-	if err := handler.Init().Listen(":" + "8080"); err != nil {
+	if err := handler.Init().Listen(":" + port); err != nil {
 		slog.Error("error with initializing server", "error", err)
 	}
 }

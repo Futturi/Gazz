@@ -1,0 +1,195 @@
+basePath: /
+definitions:
+  entities.SubscribeReq:
+    properties:
+      username:
+        type: string
+    type: object
+  entities.User:
+    properties:
+      birthday:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API Server 4 Notification Application
+  title: Notification app
+  version: "1.0"
+paths:
+  /api/subscribe:
+    post:
+      consumes:
+      - application/json
+      description: subscribe
+      operationId: subscribe
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/entities.SubscribeReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: subscribed
+          schema:
+            type: string
+        "400":
+          description: incorrect data
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: smth wrong in server
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Subscribe
+      tags:
+      - subscription
+  /api/unsubscribe:
+    post:
+      consumes:
+      - application/json
+      description: unsubscribe
+      operationId: unsubscribe
+      parameters:
+      - description: request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/entities.SubscribeReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: unsubscribed
+          schema:
+            type: string
+        "400":
+          description: incorrect data
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: smth wrong in server
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Unsubscribe
+      tags:
+      - unsubscription
+  /api/users:
+    get:
+      consumes:
+      - application/json
+      description: get all users
+      operationId: get-all-users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.User'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: smth wrong in server
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Get all users
+      tags:
+      - users
+  /auth/signin:
+    post:
+      consumes:
+      - application/json
+      description: login
+      operationId: login
+      parameters:
+      - description: account info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/entities.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: token
+          schema:
+            type: string
+        "400":
+          description: incorrect data
+          schema:
+            type: string
+        "500":
+          description: smth wrong in server
+          schema:
+            type: string
+      summary: SignIn
+      tags:
+      - auth
+  /auth/signup:
+    post:
+      consumes:
+      - application/json
+      description: create account
+      operationId: create-account
+      parameters:
+      - description: account info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/entities.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: id
+          schema:
+            type: string
+        "400":
+          description: incorrect data
+          schema:
+            type: string
+        "500":
+          description: smth wrong in server
+          schema:
+            type: string
+      summary: SignUp
+      tags:
+      - auth
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

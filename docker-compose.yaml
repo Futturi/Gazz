@@ -17,6 +17,9 @@ services:
     environment:
       - EMAIL_SENDER_ADDRESS=vanech12345@gmail.com
       - EMAIL_SENDER_PASSWORD=hnaxzkvwaiyxlptq
+      - APP_PORT=8080
+      - SHA_SALT=2ketgksdkepqwor[ptweoyiwjeijeasdnfdvberoiwpas,clvdknbftjlsa;x;,cvnbgreals;xzc,c,vnfdwow
+      - JWT_SALT=legjliqjwoejrqfgeniowo4i3wipreq;ksdfjbgkhoiterwpq[lasdkmcvnbfjghutriowepq[als;dk,m,cvnkfjg
   sql-server:
     image: postgres
     ports:

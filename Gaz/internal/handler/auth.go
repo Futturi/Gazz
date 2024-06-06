@@ -8,6 +8,17 @@ import (
 	"strings"
 )
 
+// @Summary SignUp
+// @Tags auth
+// @Description create account
+// @ID create-account
+// @Accept  json
+// @Produce  json
+// @Param input body entities.User true "account info"
+// @Success 200 {string} string "id"
+// @Failure 400 {string} string "incorrect data"
+// @Failure 500 {string} string "smth wrong in server"
+// @Router /auth/signup [post]
 func (h *Handler) SignUp(c *fiber.Ctx) error {
 	var user entities.User
 	if err := c.BodyParser(&user); err != nil {
@@ -41,6 +52,17 @@ func (h *Handler) SignUp(c *fiber.Ctx) error {
 	})
 }
 
+// @Summary SignIn
+// @Tags auth
+// @Description login
+// @ID login
+// @Accept  json
+// @Produce  json
+// @Param input body entities.User true "account info"
+// @Success 200 {string} string "token"
+// @Failure 400 {string} string "incorrect data"
+// @Failure 500 {string} string "smth wrong in server"
+// @Router /auth/signin [post]
 func (h *Handler) SignIn(c *fiber.Ctx) error {
 	var user entities.User
 	if err := c.BodyParser(&user); err != nil {

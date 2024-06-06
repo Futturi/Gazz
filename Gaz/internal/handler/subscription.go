@@ -7,6 +7,19 @@ import (
 	"log/slog"
 )
 
+// @Summary Subscribe
+// @Security ApiKeyAuth
+// @Tags subscription
+// @Description subscribe
+// @ID subscribe
+// @Accept  json
+// @Produce  json
+// @Param request body entities.SubscribeReq true "request"
+// @Success 200 {string} string "subscribed"
+// @Failure 400 {string} string "incorrect data"
+// @Failure 401 {string} string "Unauthorized"
+// @Failure 500 {string} string "smth wrong in server"
+// @Router /api/subscribe [post]
 func (h *Handler) Subscribe(c *fiber.Ctx) error {
 	id := c.Locals("user").(jwt.MapClaims)["id"].(float64)
 	if id == 0 {
@@ -37,6 +50,19 @@ func (h *Handler) Subscribe(c *fiber.Ctx) error {
 	})
 }
 
+// @Summary Unsubscribe
+// @Security ApiKeyAuth
+// @Tags unsubscription
+// @Description unsubscribe
+// @ID unsubscribe
+// @Accept  json
+// @Produce  json
+// @Param request body entities.SubscribeReq true "request"
+// @Success 200 {string} string "unsubscribed"
+// @Failure 400 {string} string "incorrect data"
+// @Failure 401 {string} string "Unauthorized"
+// @Failure 500 {string} string "smth wrong in server"
+// @Router /api/unsubscribe [post]
 func (h *Handler) Unsubscribe(c *fiber.Ctx) error {
 	id := c.Locals("user").(jwt.MapClaims)["id"].(float64)
 	if id == 0 {

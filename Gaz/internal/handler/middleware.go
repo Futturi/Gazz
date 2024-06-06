@@ -11,7 +11,7 @@ const (
 	salt2 = "legjliqjwoejrqfgeniowo4i3wipreq;ksdfjbgkhoiterwpq[lasdkmcvnbfjghutriowepq[als;dk,m,cvnkfjg"
 )
 
-func jwtMiddleware(c *fiber.Ctx) error {
+func JwtMiddleware(c *fiber.Ctx) error {
 	tokenString := c.Get("Authorization")
 	if tokenString == "" {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
